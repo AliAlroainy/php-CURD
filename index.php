@@ -57,6 +57,12 @@
 
 
                     </li>
+
+                    <li class="list-group-item d-flex justify-content-start align-items-center flex-wrap gap-2" id="personal" style="cursor: pointer;">
+                      <h5 class="mb-0" >id</h5> | <h5 class="mb-0" >name</h5>
+
+
+                    </li>
                     <?php
 
 
@@ -67,7 +73,7 @@
                             
                                 while($row = mysqli_fetch_array($result)){
                                     echo '<li class="list-group-item d-flex justify-content-start align-items-center flex-wrap gap-2" id="skills" style="cursor: pointer;">'.
-
+                                    '<h6 class="mb-0">'. $row['id'] .'</h6>'. '|'.
                                     '<h6 class="mb-0">'. $row['name'] .'</h6>'.
                                   '</li>';
                                 }}}
