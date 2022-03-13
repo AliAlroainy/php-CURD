@@ -1,18 +1,5 @@
 <?php
 
-$server = "localhost";
-$user = "root";
-$pass = "";
-$db = "cate";
-
-$con = new mysqli($server,$user,$pass,$db);
-
-
-
-?>
-
-<?php
-
 class Database{
 	
 	private $connection;
@@ -29,8 +16,8 @@ class Database{
 		}
 	}
 
-	public function create($fname,$lname,$email,$gender,$age){
-		$sql = "INSERT INTO `crud` (first_name, last_name, email_id, gender, age) VALUES ('$fname', '$lname', '$email', '$gender', '$age')";
+	public function create($pname,$pprice,$pcate,$pid){
+		$sql = "INSERT INTO `prodcuts` (name, price, cate,id) VALUES ('$pname', '$pprice', '$pcate','$pid')";
 		$res = mysqli_query($this->connection, $sql);
 		if($res){
 	 		return true;
@@ -39,32 +26,50 @@ class Database{
 		}
 	}
 
-	public function read($id=null){
-		$sql = "SELECT * FROM `crud`";
-		if($id){ $sql .= " WHERE id=$id";}
- 		$res = mysqli_query($this->connection, $sql);
- 		return $res;
-	}
-
-	public function update($fname,$lname,$email,$gender,$age, $id){
-		$sql = "UPDATE `crud` SET first_name='$fname', last_name='$lname', email='$email', gender='$gender', age='$age' WHERE id=$id";
+    public function createc($id,$cname){
+		$sql = "INSERT INTO `categories` (id, name) VALUES ('$id', '$cname')";
 		$res = mysqli_query($this->connection, $sql);
 		if($res){
-			return true;
+	 		return true;
 		}else{
 			return false;
 		}
 	}
 
-	public function delete($id){
-		$sql = "DELETE FROM `crud` WHERE id=$id";
+
+	public function readp($id=null){
+		$sql = "SELECT * FROM `prodcuts`";
+		if($id){ $sql .= " WHERE id=$id";}
  		$res = mysqli_query($this->connection, $sql);
- 		if($res){
- 			return true;
- 		}else{
- 			return false;
- 		}
+ 		return $res;
 	}
+
+    public function readc($id=null){
+		$sql = "SELECT * FROM `categories`";
+		if($id){ $sql .= " WHERE id=$id";}
+ 		$res = mysqli_query($this->connection, $sql);
+ 		return $res;
+	}
+
+	// public function update($fname,$lname,$email,$gender,$age, $id){
+	// 	$sql = "UPDATE `crud` SET first_name='$fname', last_name='$lname', email='$email', gender='$gender', age='$age' WHERE id=$id";
+	// 	$res = mysqli_query($this->connection, $sql);
+	// 	if($res){
+	// 		return true;
+	// 	}else{
+	// 		return false;
+	// 	}
+	// }
+
+	// public function delete($id){
+	// 	$sql = "DELETE FROM `crud` WHERE id=$id";
+ 	// 	$res = mysqli_query($this->connection, $sql);
+ 	// 	if($res){
+ 	// 		return true;
+ 	// 	}else{
+ 	// 		return false;
+ 	// 	}
+	// }
 
 	public function sanitize($var){
 		$return = mysqli_real_escape_string($this->connection, $var);

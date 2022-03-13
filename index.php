@@ -1,11 +1,11 @@
+
 <?php
-      
-       include('connection.php');
-       include('header.php');
-      
-        ?>  
+require_once('connection.php');
+$resc = $database->readc();
+$resp = $database->readp();
+include('header.php');
 
-
+?>
 <body class=" bg-dark">
  
  
@@ -63,25 +63,21 @@
 
 
                     </li>
+                    <?php 
+			while($rc = mysqli_fetch_assoc($resc)){
+			?>
                     
-                    <?php
 
-
-                    $sql = "SELECT * FROM categories";
-
-                    if($result = mysqli_query($con, $sql)){
-                        if(mysqli_num_rows($result) > 0){
                             
-                                while($row = mysqli_fetch_array($result)){
-                                    echo '<li class="list-group-item d-flex justify-content-start align-items-center flex-wrap gap-2" id="skills" style="cursor: pointer;">'.
-                                    '<h6 class="mb-0">'. $row['id'] .'</h6>'. '|'.
-                                    '<h6 class="mb-0">'. $row['name'] .'</h6>'.
-                                  '</li>';
-                                }}}
+            <li class="list-group-item d-flex justify-content-start align-items-center flex-wrap gap-2" id="skills" style="cursor: pointer;">
+            <h6 class="mb-0"><?php echo $rc['id']; ?></h6>
+            <h6 class="mb-0"><?php echo $rc['name']; ?></h6>
+                                  </li>
+                               
 
-                    ?>
-                  
-                 
+                                  <?php } ?>
+
+                         
                    
                   </ul>
                 </div>
@@ -103,30 +99,21 @@
                    
                         
                      
+                    <?php 
+			while($rp = mysqli_fetch_assoc($resp)){
+			?>
+                   
+                 <hr>
 
-                    <?php
+                <div class="col-sm-3">
+                <h6 class="mb-0"><?php echo $rp['name']; ?></h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+               <?php echo $rp['price']; ?>
+                </div>
+              </div>
 
-
-            $sql = "SELECT * FROM prodcuts";
-
-            if($result = mysqli_query($con, $sql)){
-                if(mysqli_num_rows($result) > 0){
-        
-            while($row = mysqli_fetch_array($result)){
-                echo ' <hr>
-
-                <div class="col-sm-3">'.
-                '<h6 class="mb-0">'. $row['name'] .'</h6>'.
-                '</div>
-                <div class="col-sm-9 text-secondary">'.
-                  '$'. $row['price'].
-                '</div>
-              </div>'
-
-               ;
-            }}}
-
-?>
+              <?php } ?>
 
                     <hr>
                    
